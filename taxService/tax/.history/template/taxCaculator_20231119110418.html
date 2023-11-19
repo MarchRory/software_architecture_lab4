@@ -1,0 +1,46 @@
+<!DOCTYPE html>  
+<html>  
+<head>  
+  <title>个人所得税计算器</title>  
+  <script>  
+    function calculateTax() {  
+      // 获取收入输入框的值  
+      var income = document.getElementById("income").value;  
+        
+      // 定义税率和扣除数  
+      var taxBrackets = [0, 36000, 144000, 252000, 360000, 660000, 960000];  
+      var taxRates = [0, 0.03, 0.1, 0.2, 0.25, 0.3, 0.35, 0.45];  
+      var deductions = [0, 2520, 16920, 31920, 52920, 85920, 181920];  
+        
+      // 计算应税所得额  
+      var taxableIncome = income - deductions[7] - 5000 * 12;  
+        
+      // 计算税额  
+      let  tax = 0;  
+      for (var i = 0; i < taxBrackets.length - 1; i++) {  
+        if (taxableIncome <= taxBrackets[i]) {  
+          tax = taxableIncome * taxRates[i];  
+          break;  
+        } else {  
+          tax += (taxBrackets[i] - taxBrackets[i - 1]) * taxRates[i];  
+        }  
+      }  
+      console.log(tax)
+      // 显示结果  
+      document.getElementById("tax").innerHTML = "税额: " + tax.toFixed(2);  
+    }  
+  </script>  
+</head>  
+<body align="center">  
+  <h1>个人所得税计算器</h1>  
+    
+  <form>  
+    <label for="income">收入:</label>  
+    <input type="number" id="income" name="income" required>  
+    <br>  
+    <button type="button" onclick="calculateTax()">计算税额</button>  
+  </form>  
+    
+  <p id="tax"></p>  
+</body>  
+</html>

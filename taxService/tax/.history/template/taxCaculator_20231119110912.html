@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人所得税计算器</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        form {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 300px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 16px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: #fff;
+            border: none;
+            padding: 10px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #result {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <form id="taxCalculatorForm">
+        <label for="income">年收入：</label>
+        <input type="number" id="income" name="income" required>
+
+        <label for="deductions">扣除额：</label>
+        <input type="number" id="deductions" name="deductions" required>
+
+        <button type="button" onclick="calculateTax()">计算所得税</button>
+
+        <div id="result"></div>
+    </form>
+
+    <script>
+        function calculateTax() {
+            // 获取输入值
+            var income = parseFloat(document.getElementById('income').value);
+            var deductions = parseFloat(document.getElementById('deductions').value);
+
+            // 执行所得税计算逻辑，这里使用一个简单的计算方式作为示例
+            var taxableIncome = income - deductions;
+            var tax = 0;
+
+            if (taxableIncome <= 5000) {
+                tax = 0.05 * taxableIncome;
+            } else if (taxableIncome <= 10000) {
+                tax = 0.1 * taxableIncome;
+            } else {
+                tax = 0.15 * taxableIncome;
+            }
+
+            // 显示计算结果
+            document.getElementById('result').innerHTML = '应缴所得税：' + tax.toFixed(2) + ' 元';
+        }
+    </script>
+
+</body>
+</html>
